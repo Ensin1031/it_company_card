@@ -1,1 +1,27 @@
 {% extends 'base.html' %}}
+{% load services_tags %}
+
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td colspan="top">
+                {% show_services_sidebar %}
+            </td>
+
+            <td>
+                <h1>{{ title }}</h1>
+                {% for item in services %}
+                    <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" alt="" width="300"></a>
+                    <p>Название: <a href="{{ item.get_absolute_url }}"> {{ item.title }}</a></p>
+                    <p>Цена: {{ item.price }} у.е.</p>
+                    <p>Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></p>
+                    <hr>
+                {% endfor %}
+
+            </td>
+
+        </tr>
+    </table>
+{% endblock %}

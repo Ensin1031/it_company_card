@@ -15,13 +15,13 @@ def slugify_value(value):
 
 class Reviews(models.Model):
     """Модель отзывов"""
-    OP = 'OP'
-    NM = 'MN'
-    OT = 'OT'
+    OPU = 'OP'
+    NMO = 'MN'
+    OTK = 'OT'
     REVIEWS_CHOICES = {
-        (OP, 'Опубликован'),
-        (NM, 'На модерации'),
-        (OT, 'Отклонен'),
+        (OPU, 'Опубликован'),
+        (NMO, 'На модерации'),
+        (OTK, 'Отклонен'),
     }
     title = models.CharField('Название', max_length=50)
     user = models.ForeignKey(
@@ -32,7 +32,7 @@ class Reviews(models.Model):
     )
     date_create = models.DateTimeField('Дата создания отзыва', auto_now_add=True)
     description = models.TextField('Описание товара', blank=True, max_length=300)
-    status = models.CharField('Статус отзыва', max_length=2, choices=REVIEWS_CHOICES, default=NM)
+    status = models.CharField('Статус отзыва', max_length=2, choices=REVIEWS_CHOICES, default=NMO)
     slug = AutoSlugField(
         'Url записи',
         max_length=150,

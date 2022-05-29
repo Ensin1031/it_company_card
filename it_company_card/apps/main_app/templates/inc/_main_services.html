@@ -1,0 +1,10 @@
+<span>
+    <h4>Наши лучшие услуги:</h4>
+    {% for item in services %}
+        <span>
+            <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+            <img src="{{ item.photo.url }}" alt="" width="300">
+        </span>
+    {% endfor %}
+    <br>
+</span>

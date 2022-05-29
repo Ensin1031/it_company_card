@@ -1,12 +1,28 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 
 from .forms import RegisterUserForm, LoginUserForm
+from .models import Promo
 
 
 def index(request):
-    return render(request, 'main_app/index.html', {'title': 'Hello, main'})
+    return render(request, 'main_app/index.html')
+
+
+class ShowPromo(DetailView):
+    template_name = 'main_app/promo.html'
+    context_object_name = 'promo'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowPromo, self).get_context_data(**kwargs)
+        context['title'] = 'Информация по акции "' + str(self.object.title) + '"'
+        context['disc'] = int(self.object.discounts * 100)
+        return context
+
+    def get_queryset(self):
+        return Promo.objects.filter(is_published=True)
 
 
 def register(request):

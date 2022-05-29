@@ -1,7 +1,8 @@
 from django import template
 
-from apps.main_app.models import Banners
+from apps.main_app.models import Promo
 from apps.news.models import News
+from apps.services.models import Services
 
 register = template.Library()
 
@@ -14,5 +15,11 @@ def show_main_news():
 
 @register.inclusion_tag('inc/_main_banners.html')
 def show_banners():
-    queryset = Banners.objects.filter(is_published=True)[:2]
+    queryset = Promo.objects.filter(is_published=True)[:2]
     return {'banners': queryset}
+
+
+@register.inclusion_tag('inc/_main_services.html')
+def show_main_services():
+    queryset = Services.objects.filter(show_main=True)[:3]
+    return {'services': queryset}

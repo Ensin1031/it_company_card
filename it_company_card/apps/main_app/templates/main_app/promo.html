@@ -1,0 +1,18 @@
+{% extends 'base.html' %}}
+
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>{{ title }}</h1>
+        <p><img src="{{ promo.image.url }}" alt="" width="500"></p>
+        <h3>Скидка по акции: {{ disc }} % </h3>
+        <div>
+            <h3>Описание акции</h3>
+            {{ promo.description|linebreaksbr }}
+        </div>
+    </div>
+
+
+
+{% endblock %}

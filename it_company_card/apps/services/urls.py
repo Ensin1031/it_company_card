@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import ShowServises
+from .views import ShowServices, ShowService
 
 
 urlpatterns = [
-    path('', ShowServises.as_view(), name='services'),
-    # path('add_review/', AddReview.as_view(), name='add_review'),
+    path('', ShowServices.as_view(), name='services'),
+    path('add_review/<str:slug>/', ShowService.as_view(), name='service'),
+    path('services_for_category/<str:slug>/', ShowServices.as_view(), name='services_by_category'),
 ]

@@ -1,0 +1,25 @@
+{% load static mptt_tags %}
+<hr>
+<h3>Категории услуг</h3>
+ <a href="{% url 'services' %}">Все услуги</a>
+<ul>
+    {% recursetree category %}
+        <p>
+            <a href="{{ node.get_absolute_url }}">{{ node.title }} (  {{ node.cnt }}  )</a>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </p>
+    {% endrecursetree %}
+</ul>
+<hr>
+
+<ul>
+    <h3>Акции</h3>
+    {% for value in promo %}
+        <p><a href="{{ value.get_absolute_url }}">{{ value.title }}</a></p>
+    {% endfor %}
+
+</ul>

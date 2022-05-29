@@ -6,6 +6,8 @@ from django.urls import reverse
 from autoslug import AutoSlugField
 from uuslug import uuslug
 
+from apps.main_app.models import Promo
+
 
 def instance_slug(instance):
     return instance.title
@@ -49,7 +51,7 @@ class Category(MPTTModel):
         super(Category, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'slug': self.slug})
+        return reverse('services_by_category', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title
@@ -58,12 +60,12 @@ class Category(MPTTModel):
         order_insertion_by = ('title',)
 
     class Meta:
-        verbose_name = 'Категория(ю)'
-        verbose_name_plural = 'Категории(ий)'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
         ordering = ('title',)
 
 
-class Servises(models.Model):
+class Services(models.Model):
     """
     Model GalleryDB to save new goods to database
     """
@@ -80,14 +82,15 @@ class Servises(models.Model):
     specifications = models.TextField('Характеристики', blank=True)
     price = models.DecimalField('Цена', max_digits=10, decimal_places=2, default=0)
     presence = models.BooleanField('Наличие', default=True)
-    n_views = models.IntegerField('Количество заказов', default=0)
-    discounts = models.DecimalField(
-            max_digits=3,
-            decimal_places=2,
-            verbose_name='Скидка',
-            null=True,
-            help_text='От 0.01 до 0.99',
-            validators=[validators.MinValueValidator(0.01), validators.MaxValueValidator(0.99)]
+    n_views = models.IntegerField('Количество просмотров', default=0)
+    show_main = models.BooleanField('Показывать на Главной', default=False)
+    discounts = models.ForeignKey(
+        Promo,
+        verbose_name='Скидка по акции',
+        on_delete=models.PROTECT,
+        related_name='promo_serv',
+        null=True,
+        blank=True,
     )
     slug = AutoSlugField(
             max_length=255,
@@ -100,15 +103,15 @@ class Servises(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = uuslug(self.title, instance=self)
-        super(Servises, self).save(*args, **kwargs)
+        super(Services, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('good', kwargs={'slug': self.slug})
+        return reverse('service', kwargs={'slug': self.slug})
 
     def __str__(self):
         return str(self.title)
 
     class Meta:
-        verbose_name = 'Товар(а)'
-        verbose_name_plural = 'Товары(ов)'
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
         ordering = ('title',)
