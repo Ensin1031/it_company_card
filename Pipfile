@@ -8,6 +8,9 @@ django = "==4.0.4"
 python-decouple = "==3.6"
 pillow = "==9.1.1"
 django-debug-toolbar = "==3.4.0"
+django-autoslug = "==1.9.8"
+django-uuslug = "==2.0.0"
+django-filter = "==21.1"
 
 [dev-packages]
 

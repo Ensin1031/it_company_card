@@ -1,0 +1,11 @@
+{% extends 'base.html' %}}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div>
+    <h1>{{ news_post.title }}  -  {{ news_post.date_create|date:"d E Y  H:i" }}</h1>
+    <p><img src="{{ news_post.image.url }}" alt="" width="300"></p>
+    <p>{{ news_post.content| linebreaksbr }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}}
+
+{% block title %}Список новостей :: {{ block.super }}{% endblock %}
+
+{% block content %}
+    <form method="get">
+    {{ filter.form }}
+    <button type="submit">Фильтровать</button>
+    </form>
+
+    {% for value in filter.qs %}
+        <div>
+            <hr>
+            <p>{{ value.date_create }}</p>
+            <p><a href="{{ value.get_absolute_url }}"> Название: {{ value }}</a></p>
+            <p><span><img src="{{ value.image.url }}" alt="" width="150"></span></p>
+            <p>
+                <span>Описание: {{ value.content|truncatechars:20 }}</span>
+                <span><a href="{{ value.get_absolute_url }}">Читать подробнее</a></span>
+            </p>
+        </div>
+    {% endfor %}
+    <hr>
+{% endblock %}
+
+Дата новости, картинка, название, короткое описание(20 символов)
