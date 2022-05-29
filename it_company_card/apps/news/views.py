@@ -12,9 +12,6 @@ class ShowNews(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowNews, self).get_context_data(**kwargs)
         context['filter'] = NewsFilter(self.request.GET, queryset=self.get_queryset())
-        print(self.request.GET)
-        # for i in context['filter'].qs:
-        #     print(i)
         return context
 
     def get_queryset(self):
@@ -24,7 +21,6 @@ class ShowNews(ListView):
 class ViewPost(DetailView):
     template_name = 'news/post.html'
     context_object_name = 'news_post'
-
 
     def get_context_data(self, **kwargs):
         context = super(ViewPost, self).get_context_data(**kwargs)

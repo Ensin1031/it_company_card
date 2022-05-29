@@ -1,0 +1,31 @@
+{% extends 'base.html' %}}
+
+{% block title %}Список новостей :: {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <div><a href="{% url 'add_review' %}">Добавить свой отзыв</a></div>
+
+    {% else %}
+        <p>Вы не авторизованы.</p>
+        <p>Если Вы хотите оставить свой отзыв:</p>
+        <a href="{% url 'register' %}">Зарегистрируйтесь</a> |
+        <a href="{% url 'login' %}">Авторизуйтесь</a>
+
+    {% endif %}
+
+    {% for post in posts %}
+        <div>
+            <hr>
+            <p>{{ post.date_create }}</p>
+            <p>Название: {{ post.title }}</p>
+            <p>Пользователь: {{ post.user }}</p>
+            <p>
+                <span>Описание: {{ post.description }}</span>
+            </p>
+        </div>
+
+    {% endfor %}
+    <hr>
+{% endblock %}
