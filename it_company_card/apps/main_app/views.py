@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView, DetailView
 
 from .forms import RegisterUserForm, LoginUserForm
 from .models import Promo
@@ -23,6 +23,10 @@ class ShowPromo(DetailView):
 
     def get_queryset(self):
         return Promo.objects.filter(is_published=True)
+
+
+class ShowContacts(CreateView):
+    pass
 
 
 def register(request):

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_filters',
     'mptt',
+    'captcha',
     'apps.main_app.apps.MainAppConfig',
     'apps.services.apps.ServicesConfig',
     'apps.news.apps.NewsConfig',

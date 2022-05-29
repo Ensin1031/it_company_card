@@ -26,6 +26,7 @@ urlpatterns = [
     path('services/', include('apps.services.urls')),
     path('news/', include('apps.news.urls')),
     path('reviews/', include('apps.reviews.urls')),
+    path('captcha/', include('captcha.urls')),
 ]
 
 
