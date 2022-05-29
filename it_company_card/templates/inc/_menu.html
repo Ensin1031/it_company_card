@@ -1,0 +1,36 @@
+<div>
+    <p>
+        <span><a href="{% url 'home' %}">Главная</a></span>
+        <span><a href="{% url 'services' %}">Услуги</a></span>
+        <span><a href="{% url 'news_index' %}">Новости</a></span>
+        <span><a href="{% url 'reviews' %}">Отзывы</a></span>
+        <span><a href="#{# url 'contacts' #}">Контакты</a></span>
+    </p>
+    <div>
+        {% if request.user.is_authenticated %}
+            <span>Добро пожаловать, {{ request.user }} |</span>
+            <span><a href="{% url 'logout' %}">Выход</a></span>
+
+        {% else %}
+            <p>Вы не авторизованы.</p>
+            <a href="{% url 'register' %}">Зарегистрируйтесь</a> |
+            <a href="{% url 'login' %}">Авторизуйтесь</a>
+
+        {% endif %}
+
+        {% for post in posts %}
+            <div>
+                <hr>
+                <p>{{ post.date_create }}</p>
+                <p>Название: {{ post.title }}</p>
+                <p>Пользователь: {{ post.user }}</p>
+                <p>
+                    <span>Описание: {{ post.description }}</span>
+                </p>
+            </div>
+
+        {% endfor %}
+        <hr>
+
+    </div>
+</div>

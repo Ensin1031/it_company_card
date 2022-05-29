@@ -1,0 +1,10 @@
+<div>
+    <h4>Последние новости:</h4>
+    {% for item in news %}
+        <span>
+            <span><a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt="" width="120"></a></span>
+            <span><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></span>
+        </span>
+    {% endfor %}
+    <br>
+</div>

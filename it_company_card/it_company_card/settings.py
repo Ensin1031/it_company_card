@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_filters',
+    'mptt',
     'apps.main_app.apps.MainAppConfig',
+    'apps.services.apps.ServicesConfig',
     'apps.news.apps.NewsConfig',
     'apps.reviews.apps.ReviewsConfig',
 ]
