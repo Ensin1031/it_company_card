@@ -33,6 +33,7 @@ class Reviews(models.Model):
     date_create = models.DateTimeField('Дата создания отзыва', auto_now_add=True)
     description = models.TextField('Описание товара', blank=True, max_length=300)
     status = models.CharField('Статус отзыва', max_length=2, choices=REVIEWS_CHOICES, default=NMO)
+    deleted = models.BooleanField('На удаление', default=False)
     slug = AutoSlugField(
         'Url записи',
         max_length=150,

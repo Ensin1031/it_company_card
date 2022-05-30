@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from autoslug import AutoSlugField
 from uuslug import uuslug
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
+from django.core.mail import send_mail, BadHeaderError
 
 
 def instance_slug(instance):
@@ -66,13 +68,22 @@ class Contacts(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+        ordering = ('name',)
+
 
 @receiver(post_save, sender=Contacts)
 def sign_for_save_post_contacts(sender, instance, created, **kwargs):
-    print('sender =', sender)
-    print('instance =', instance, instance.phone)
-    print('created =', created)
-    print('kwargs =', kwargs)
-    print('Contacts post is created')
+    admin_list = User.objects.filter(is_superuser=True)
+    admin_email_list = []
+    for email in admin_list:
+        admin_email_list.append(email.email)
+    subject = 'Тест сайт'
+    message = f'New message from {instance}, {instance.email_user} '
+    for admin in admin_email_list:
+        send_mail(subject, message, 'ensin81@mail.ru', (admin,), fail_silently=False)
+    return admin_list
 
 

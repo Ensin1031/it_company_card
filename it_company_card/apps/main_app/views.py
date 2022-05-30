@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
+from django.core.mail import send_mail, BadHeaderError
 
 from .forms import RegisterUserForm, LoginUserForm, ContactsForm
 from .models import Promo
@@ -30,6 +32,16 @@ class ShowContacts(CreateView):
     form_class = ContactsForm
     template_name = 'main_app/contacts.html'
     success_url = reverse_lazy('home')
+
+    # def form_valid(self, form):
+    #     admin_list = User.objects.filter(is_superuser=True)
+    #     subject = 'Тест сайт'
+    #     message = 'Новое сообщение от пользователя'
+    #     for admin in admin_list:
+    #         print(admin.email)
+    #         # send_mail(subject, message, admin.email, [admin.email])
+    #
+    #     return super(ShowContacts, self).form_valid(form)
 
 
 def register(request):

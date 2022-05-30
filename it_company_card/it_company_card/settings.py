@@ -147,3 +147,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
 
 INTERNAL_IPS = ['127.0.0.1']
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = 465    # 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
