@@ -26,7 +26,15 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+
+ALLOWED_HOSTS = [
+    'b4c2-85-15-124-103.eu.ngrok.io',
+]
+CSRF_TRUSTED_ORIGINS = ['https://b4c2-85-15-124-103.eu.ngrok.io', 'http://127.0.0.1:8080/', 'http://localhost:8080/']
+
 
 
 # Application definition
