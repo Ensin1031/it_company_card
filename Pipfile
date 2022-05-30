@@ -13,6 +13,8 @@ django-uuslug = "==2.0.0"
 django-filter = "==21.1"
 django-mptt = "==0.13.4"
 django-simple-captcha = "==0.5.17"
+django-phonenumber-field = "==6.1.0"
+phonenumbers = "==8.12.49"
 
 [dev-packages]
 

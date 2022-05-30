@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
-from .forms import RegisterUserForm, LoginUserForm
+from .forms import RegisterUserForm, LoginUserForm, ContactsForm
 from .models import Promo
 
 
@@ -26,7 +27,9 @@ class ShowPromo(DetailView):
 
 
 class ShowContacts(CreateView):
-    pass
+    form_class = ContactsForm
+    template_name = 'main_app/contacts.html'
+    success_url = reverse_lazy('home')
 
 
 def register(request):

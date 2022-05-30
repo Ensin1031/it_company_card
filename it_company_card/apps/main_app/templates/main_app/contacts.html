@@ -1,0 +1,34 @@
+{% extends 'base.html' %}}
+{% block title %}
+    Отправка сообщение пользователем
+{% endblock %}
+
+{% block content %}
+
+    <h1>Наши контакты</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla malesuada elit at magna congue, ut cursus est
+        mattis. Nulla commodo hendrerit sollicitudin. Nullam maximus, lacus at sodales ullamcorper, ex est luctus magna,
+        sed laoreet felis ante a purus. Aenean eget elit convallis, porttitor justo ut, feugiat metus. Sed vitae lacus
+        nibh. Vestibulum hendrerit blandit tempor. Pellentesque aliquam, magna sed feugiat rutrum, justo massa lobortis
+        lectus, nec mollis diam libero et ex.</p>
+
+    <p>Pellentesque leo nulla, commodo non gravida vel, tempor nec neque. Pellentesque auctor nisi tincidunt velit
+        euismod iaculis. Quisque id gravida augue, at suscipit nulla. In lobortis ligula in condimentum luctus. Fusce
+        mollis tortor quis nibh feugiat, vitae scelerisque nulla facilisis. Maecenas mollis lacinia leo eget
+        ullamcorper. Duis at volutpat neque.</p>
+
+    <p>Nulla maximus, libero ac hendrerit suscipit, nisi diam aliquam felis, et elementum sapien risus sed tortor.
+        Aenean a sagittis lectus. Mauris tristique nisi sit amet lacus imperdiet ullamcorper. Nullam sodales felis eget
+        ante dignissim tristique. Praesent blandit urna at erat faucibus varius. Phasellus vulputate augue quis justo
+        pellentesque pellentesque. Morbi porta, enim non tincidunt luctus, ligula neque vestibulum purus, mattis
+        fermentum purus ante ut est. Suspendisse imperdiet ipsum sit amet risus eleifend egestas. Cras pretium justo
+        lectus, id dignissim sem venenatis at. Mauris ut metus hendrerit, mollis nibh at, porta est.</p>
+    <hr>
+    <h2>Напиши администрации сайта:</h2>
+    <form action="{% url 'contacts' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+{% endblock %}

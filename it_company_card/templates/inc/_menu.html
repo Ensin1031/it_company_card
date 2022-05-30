@@ -4,7 +4,7 @@
         <span><a href="{% url 'services' %}">Услуги</a></span>
         <span><a href="{% url 'news_index' %}">Новости</a></span>
         <span><a href="{% url 'reviews' %}">Отзывы</a></span>
-        <span><a href="#{# url 'contacts' #}">Контакты</a></span>
+        <span><a href="{% url 'contacts' %}">Контакты</a></span>
     </p>
     <div>
         {% if request.user.is_authenticated %}

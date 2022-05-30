@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_filters',
     'mptt',
+    'phonenumber_field',
     'captcha',
     'apps.main_app.apps.MainAppConfig',
     'apps.services.apps.ServicesConfig',

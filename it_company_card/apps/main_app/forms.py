@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from captcha.fields import CaptchaField
+
+from .models import Contacts
 
 
 class RegisterUserForm(UserCreationForm):
@@ -19,3 +22,13 @@ class LoginUserForm(AuthenticationForm):
     """Класс аутентификации пользователя"""
     username = forms.CharField(label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+class ContactsForm(forms.ModelForm):
+    """Форма отправки сообщения пользователя"""
+    captcha = CaptchaField(label='Подтвердите, что вы не бот')
+
+    class Meta:
+        model = Contacts
+        fields = ('name', 'content', 'email_user', 'phone', 'captcha')
+

@@ -1,8 +1,11 @@
 from django.core import validators
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from autoslug import AutoSlugField
 from uuslug import uuslug
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 def instance_slug(instance):
@@ -51,5 +54,25 @@ class Promo(models.Model):
         verbose_name = 'Акция'
         verbose_name_plural = 'Акции'
         ordering = ('-discounts',)
+
+
+class Contacts(models.Model):
+    name = models.CharField('Имя', max_length=100)
+    content = models.TextField('Текст сообщения', max_length=1000)
+    email_user = models.EmailField('E-mail', help_text='введите ваш E-mail')
+    phone = PhoneNumberField('Номер телефона')
+    reviewed = models.BooleanField('Рассмотрено', default=False)
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(post_save, sender=Contacts)
+def sign_for_save_post_contacts(sender, instance, created, **kwargs):
+    print('sender =', sender)
+    print('instance =', instance, instance.phone)
+    print('created =', created)
+    print('kwargs =', kwargs)
+    print('Contacts post is created')
 
 

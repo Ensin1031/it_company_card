@@ -4,7 +4,7 @@ from .models import Reviews
 
 
 class AddReviewForm(forms.ModelForm):
-    """Форма нового коментария"""
+    """Форма нового комментария"""
     class Meta:
         model = Reviews
         fields = ('title', 'description')
