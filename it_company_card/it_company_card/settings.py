@@ -31,9 +31,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = [
-    'b4c2-85-15-124-103.eu.ngrok.io',
+    '0f21-85-15-124-103.eu.ngrok.io',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://b4c2-85-15-124-103.eu.ngrok.io', 'http://127.0.0.1:8080/', 'http://localhost:8080/']
+CSRF_TRUSTED_ORIGINS = ['https://0f21-85-15-124-103.eu.ngrok.io', 'http://127.0.0.1:8080/', 'http://localhost:8080/']
 
 
 
