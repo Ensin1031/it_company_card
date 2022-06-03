@@ -30,12 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # CSRF_COOKIE_SECURE = True
 # SECURE_SSL_REDIRECT = True
 
-ALLOWED_HOSTS = [
-    '0f21-85-15-124-103.eu.ngrok.io',
-]
+ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://0f21-85-15-124-103.eu.ngrok.io', 'http://127.0.0.1:8080/', 'http://localhost:8080/']
-
-
 
 # Application definition
 
@@ -156,9 +152,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = ['127.0.0.1']
 
+# e-mail
+
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 465    # 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+# django-dynamic-breadcrumbs
+# https://github.com/marcanuy/django-dynamic-breadcrumbs
+
+# DYNAMIC_BREADCRUMBS_HOME_LABEL = 'Главная'
+
+# django-view-breadcrumbs
+# https://pypi.org/project/django-view-breadcrumbs/
+#
+
+# BREADCRUMBS_HOME_LABEL = 'Главная'
+# BREADCRUMBS_TEMPLATE = 'it_company_card/breadcrumbs.html'

@@ -10,9 +10,19 @@ class ShowServices(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowServices, self).get_context_data(**kwargs)
         if 'slug' in self.kwargs.keys():
-            context['title'] = f'Все услуги в категории {Category.objects.filter(slug=self.kwargs["slug"]).first()}'
+            cats = Category.objects.filter(slug=self.kwargs["slug"]).first()
+            context['title'] = f'Все услуги в категории {cats}'
+            context['breadcrumbs'] = (
+                {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+                {'position': 2, 'name': 'Все услуги', 'url': 'news_index', 'resolved': True},
+                {'position': 3, 'name': f'Услуги категории "{cats}"', 'resolved': False},
+            )
         else:
             context['title'] = f'Все услуги'
+            context['breadcrumbs'] = (
+                {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+                {'position': 2, 'name': 'Все услуги', 'resolved': False},
+            )
         return context
 
     def get_queryset(self):
@@ -31,6 +41,11 @@ class ShowService(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ShowService, self).get_context_data(**kwargs)
         context['title'] = 'Просмотреть услугу "' + str(self.object.title) + '"'
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Все услуги', 'url': 'services', 'resolved': True},
+            {'position': 3, 'name': f'Услуга "{self.object.title}"', 'resolved': False},
+        )
         if self.object.discounts:
             context['new_price'] = round((1 - self.object.discounts.discounts) * self.object.price, 2)
         return context

@@ -32,6 +32,14 @@ class ShowContacts(CreateView):
     template_name = 'main_app/contacts.html'
     success_url = reverse_lazy('home')
 
+    def get_context_data(self, **kwargs):
+        context = super(ShowContacts, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Написать администрации сайта', 'resolved': False},
+        )
+        return context
+
 
 @csrf_protect
 def register(request):

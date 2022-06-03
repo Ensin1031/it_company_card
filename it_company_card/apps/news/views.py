@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from .models import News
@@ -12,6 +11,10 @@ class ShowNews(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowNews, self).get_context_data(**kwargs)
         context['filter'] = NewsFilter(self.request.GET, queryset=self.get_queryset())
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Все новости', 'url': 'news_index', 'resolved': False},
+        )
         return context
 
     def get_queryset(self):
@@ -25,6 +28,11 @@ class ViewPost(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ViewPost, self).get_context_data(**kwargs)
         context['title'] = f'Детали новости "{self.object}"'
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Все новости', 'url': 'news_index', 'resolved': True},
+            {'position': 3, 'name': f'Новость "{self.object.title}"', 'resolved': False},
+        )
         return context
 
     def get_queryset(self):

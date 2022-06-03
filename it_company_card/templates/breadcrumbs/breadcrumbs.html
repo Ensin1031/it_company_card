@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb alert alert-success" itemprop="breadcrumb" itemscope
+        itemtype="https://schema.org/BreadcrumbList">
+        {% for crumb in breadcrumbs %}
+            {% if forloop.last %}
+                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem" aria-current="page">
+                    <span itemprop="name">{{ crumb.name }}</span>
+                    <meta itemprop="position" content='{{ crumb.position }}'/>
+                </li>
+            {% else %}
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    {% if crumb.resolved %}
+                        <a itemprop="item" href="{% url crumb.url %}">
+                            <span itemprop="name">{{ crumb.name }}</span>
+                        </a>
+                        <meta itemprop="position" content="{{ crumb.position }}"/>
+                    {% else %}
+                        <span itemprop="name">{% trans crumb.name %}</span>
+                        <meta itemprop="position" content="{{ crumb.position }}"/>
+
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</nav>

@@ -13,6 +13,10 @@ class ShowReviews(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowReviews, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Все отзывы', 'resolved': False},
+        )
         return context
 
     def get_queryset(self):
@@ -24,6 +28,15 @@ class AddReview(LoginRequiredMixin, CreateView):
     template_name = 'reviews/add_review.html'
     raise_exception = True
     success_url = reverse_lazy('reviews')
+
+    def get_context_data(self, **kwargs):
+        context = super(AddReview, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = (
+            {'position': 1, 'name': 'Главная', 'url': 'home', 'resolved': True},
+            {'position': 2, 'name': 'Все отзывы', 'url': 'reviews', 'resolved': True},
+            {'position': 3, 'name': 'Добавить отзыв', 'resolved': False},
+        )
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
